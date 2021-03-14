@@ -1,12 +1,8 @@
 require('dotenv').config();
-const Discord = require('discord.js');
-const commands = require('./commands/index')
-const bot = new Discord.Client();
-const TOKEN = process.env.TOKEN;
+const commands = require('./commands/index');
+const bot = require('./bot');
 
-bot.login(TOKEN);
-
-bot.on('message', async msg => {
-  const commandToExec = commands.find(command => command.name === msg.content)
-  if(commandToExec) await commandToExec.execute(msg, commandToExec.allowedRoles)
+bot.on('message', async (msg) => {
+  const commandToExec = commands.find((command) => command.name === msg.content);
+  if (commandToExec) await commandToExec.execute(msg, commandToExec.allowedRoles);
 });

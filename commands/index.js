@@ -1,10 +1,9 @@
-const deleteMessages = require('./deleteMessages');
 const takeAttendance = require('./takeAttendance');
 
 const commands = [{
-    name: "!takeAttendance",
-    execute: takeAttendance,
-    allowedRoles: ["docente"]
-}]
+  name: '!takeAttendance',
+  execute: takeAttendance,
+  allowedRoles: ['docente'],
+}];
 
-module.exports = commands
+module.exports = commands;

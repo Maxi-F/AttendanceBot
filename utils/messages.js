@@ -1,3 +1,5 @@
+const bot = require('../bot');
+
 const createEmbed = (message, embedInfo) => ({
   color: '#0099ff',
   title: 'AttendanceBot',
@@ -11,5 +13,5 @@ const sendMessageTo = (channelId, messageText, embedInfo = {}) => {
 };
 
 module.exports = {
-  sendMessageTo
-}
+  sendMessageTo,
+};
