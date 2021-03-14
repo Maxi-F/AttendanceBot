@@ -1,9 +1,11 @@
+const executeCheckingRoles = require('../utils/executeCheckingRoles');
 const takeAttendance = require('./takeAttendance');
 
 const commands = [{
   name: '!takeAttendance',
   execute: takeAttendance,
-  allowedRoles: ['docente'],
+  middlewares: [executeCheckingRoles(['docente'])],
+  isExecutionPossible: true,
 }];
 
 module.exports = commands;

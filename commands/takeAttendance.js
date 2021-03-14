@@ -1,5 +1,4 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-const executeCheckingRoles = require('../utils/executeCheckingRoles');
 const getAttendanceFrom = require('../utils/getAttendanceFrom');
 const { sendMessageTo } = require('../utils/messages');
 
@@ -26,10 +25,11 @@ const getAttendanceSheetWithNewHeaderDate = async (document, dateHeader) => {
   return sheet;
 };
 
-const takeAttendance = async (msg, allowedRoles) => {
-  await executeCheckingRoles(msg, allowedRoles, async () => {
-    sendMessageTo(msg.channel.id, 'Buenas! Reaccionen acá para dejar su presente!');
-  });
+const takeAttendance = async (msg) => {
+  const message = await sendMessageTo(msg.channel.id, 'Buenas! Reaccionen acá para dejar su presente!');
+
+  message.react('🤚');
+};
   /*
     await executeCheckingRoles(msg, allowedRoles, async () => {
         try {
@@ -54,6 +54,5 @@ const takeAttendance = async (msg, allowedRoles) => {
         }
     })
     */
-};
 
 module.exports = takeAttendance;

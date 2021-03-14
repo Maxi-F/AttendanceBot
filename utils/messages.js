@@ -1,14 +1,14 @@
 const bot = require('../bot');
 
 const createEmbed = (message, embedInfo) => ({
-  color: '#0099ff',
+  color: '5',
   title: 'AttendanceBot',
   description: message,
   ...embedInfo,
 });
 
 const sendMessageTo = (channelId, messageText, embedInfo = {}) => {
-  const channel = bot.channels.cache.get(channelId);
+  const channel = bot.channels.get(channelId);
   return channel.send({ embed: createEmbed(messageText, embedInfo) });
 };
 

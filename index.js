@@ -4,5 +4,10 @@ const bot = require('./bot');
 
 bot.on('message', async (msg) => {
   const commandToExec = commands.find((command) => command.name === msg.content);
-  if (commandToExec) await commandToExec.execute(msg, commandToExec.allowedRoles);
+  if (commandToExec) {
+    commandToExec.middlewares.forEach(
+      (middleware) => commandToExec.isExecutionPossible && middleware(msg, commandToExec),
+    );
+    return commandToExec.isExecutionPossible && commandToExec.execute(msg);
+  }
 });
