@@ -1,6 +1,7 @@
 const executeCheckingRoles = require('../utils/executeCheckingRoles')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
-const getAttendanceFrom = require('../utils/getAttendanceFrom')
+const getAttendanceFrom = require('../utils/getAttendanceFrom');
+const { sendMessageTo } = require('../utils/messages');
 
 const getSpreadSheet = async () => {
     const doc = new GoogleSpreadsheet('1rtHUbEfEs6np-57ONBQ7gdsjjR3HoGCjYJgOrezUsK4'); // Spreadsheet link ID
@@ -27,6 +28,10 @@ const getAttendanceSheetWithNewHeaderDate = async (document, dateHeader) => {
 
 const takeAttendance = async (msg, allowedRoles) => {
     await executeCheckingRoles(msg, allowedRoles, async () => {
+        sendMessageTo(msg.channel.id, 'Buenas! Reaccionen acá para dejar su presente!');
+    })
+    /*
+    await executeCheckingRoles(msg, allowedRoles, async () => {
         try {
             const presentPeople = await getAttendanceFrom(msg.channel);
             const doc = await getSpreadSheet();
@@ -38,7 +43,7 @@ const takeAttendance = async (msg, allowedRoles) => {
             const dataOnSheet = await sheet.getRows();
     
             presentPeople.forEach(async presentPerson => {
-                const rowToUpdate = dataOnSheet.find(row => row.username == presentPerson);
+                const rowToUpdate = dataOnSheet.find(row => row.username === presentPerson);
                 if(rowToUpdate) {
                     rowToUpdate[dateHeader] = "P";
                     await rowToUpdate.save()
@@ -48,6 +53,7 @@ const takeAttendance = async (msg, allowedRoles) => {
             console.log(error)
         }
     })
+    */
 }
 
 module.exports = takeAttendance
